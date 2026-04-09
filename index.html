@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayşe için Özel</title>
     <style>
         body {
             margin: 0;
@@ -13,85 +12,81 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            perspective: 1000px; /* 3D derinlik için şart */
             overflow: hidden;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: sans-serif;
         }
 
-        #ui {
-            position: relative;
-            width: 0;
-            height: 0;
-            transform-style: preserve-3d;
-            transform: rotateY(0deg) rotateX(10deg);
-            animation: rotateScene 15s infinite linear;
-        }
-
-        @keyframes rotateScene {
-            from { transform: rotateY(0deg) rotateX(10deg); }
-            to { transform: rotateY(360deg) rotateX(10deg); }
-        }
-
-        .love_word {
-            position: absolute;
+        /* VİDEODAKİ BİREBİR CSS KODLARI */
+        #ui .love_word {
             color: #ea80b0;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            transform: translateY(-100%) rotateZ(-30deg);
+            text-shadow: 0 0 10px #fff;
+            letter-spacing: 2px;
             white-space: nowrap;
-            text-shadow: 0 0 10px #ea80b0;
-            /* Videodaki o özel transform yapısı */
-            transform: var(--transform-custom);
+        }
+
+        #ui .love_horizontal {
             animation: horizontal 10000ms infinite alternate ease-in-out;
-            animation-delay: var(--delay);
+            animation-delay: calc(var(--i) * -300ms);
         }
 
         @keyframes horizontal {
-            0% { transform: var(--transform-custom) translateX(-50px); }
-            100% { transform: var(--transform-custom) translateX(50px); }
+            0% { transform: translateX(-150px); }
+            100% { transform: translateX(150px); }
         }
 
-        .ayse-notu {
-            position: absolute;
-            bottom: 10%;
-            color: #fff;
+        /* KALBİ OLUŞTURAN DİKEY HAREKET */
+        .love_vertical {
+            animation: vertical 20000ms infinite linear;
+            animation-delay: calc(var(--i) * -300ms);
+        }
+
+        @keyframes vertical {
+            0% { transform: translateY(250px); }
+            100% { transform: translateY(-250px); }
+        }
+
+        /* SABİT NOT */
+        .not {
+            margin-top: 50px;
+            color: white;
             text-align: center;
-            z-index: 100;
-            max-width: 80%;
-            animation: fadeIn 5s ease-in;
+            z-index: 10;
         }
-
-        .ayse-notu h1 { color: #ea80b0; margin-bottom: 10px; font-size: 1.5rem; }
-        .ayse-notu p { font-style: italic; opacity: 0.8; line-height: 1.4; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .not h1 { color: #ea80b0; font-size: 1.5rem; margin-bottom: 5px; }
+        .not p { opacity: 0.8; font-style: italic; font-size: 1.1rem; max-width: 350px; }
     </style>
 </head>
 <body>
 
 <div id="ui">
-    <script>
-        const ui = document.getElementById('ui');
-        const totalWords = 30;
-        for (let i = 0; i < totalWords; i++) {
-            const div = document.createElement('div');
-            div.className = 'love_word';
-            // Her kelimeyi dairesel ve dikey bir açıyla döndürerek kalp formu veriyoruz
-            const angle = (i / totalWords) * 360;
-            const transform = `rotateY(${angle}deg) translateY(${Math.sin(i) * 100}px) translateZ(150px) rotateZ(-30deg)`;
-            
-            div.style.setProperty('--transform-custom', transform);
-            div.style.setProperty('--delay', `${i * -300}ms`);
-            div.innerText = 'i love you';
-            ui.appendChild(div);
-        }
-    </script>
+    <div class="love_horizontal" style="--i:1"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:2"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:3"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:4"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:5"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:6"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:7"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:8"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:9"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:10"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:11"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:12"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:13"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:14"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:15"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:16"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:17"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:18"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:19"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
+    <div class="love_horizontal" style="--i:20"><div class="love_vertical"><div class="love_word">i love you</div></div></div>
 </div>
 
-<div class="ayse-notu">
+<div class="not">
     <h1>Ayşe...</h1>
-    <p>
-        Sana olan kırgınlığım içimde sessizce dursa da, bu ne seni sevmeme engel ne de senden vazgeçmeme... 
-        Kalbim hala deliler gibi senin için çarpıyor. Seni hala çok seviyorum.
-    </p>
+    <p>Sana olan kırgınlığım içimde sessizce dursa da, kalbim hala deliler gibi senin için çarpıyor. Seni hala çok seviyorum.</p>
 </div>
 
 </body>
