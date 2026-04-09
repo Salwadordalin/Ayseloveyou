@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding Wizard - Heart Animation</title>
+    <title>Ayşe için...</title>
     <style>
-        /* Genel sayfa düzeni */
         body {
             margin: 0;
             padding: 0;
@@ -15,76 +14,105 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* Ana kapsayıcı */
         #ui {
             position: relative;
             transform-style: preserve-3d;
             perspective: 1000px;
         }
 
-        /* Görseldeki .love_word sınıfı */
+        /* Dönen "I Love You" yazıları */
         .love_word {
             color: #ea80b0;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             position: absolute;
-            /* Görseldeki orijinal transform */
             transform: translateY(-100%) rotateZ(-30deg);
-            text-shadow: 0 0 10px #fff;
+            text-shadow: 0 0 8px #fff;
             letter-spacing: 2px;
             white-space: nowrap;
             user-select: none;
+            opacity: 0.6;
         }
 
-        /* Görseldeki .love_horizontal sınıfı */
         .love_horizontal {
             position: absolute;
             transform-style: preserve-3d;
-            /* Görseldeki animasyon tanımı */
             animation: horizontal 10000ms infinite alternate ease-in-out;
             animation-delay: calc(var(--i) * -300ms);
         }
 
-        /* Kalp formunu veren ve döndüren animasyon */
+        /* Ortadaki Sabit Not */
+        .message-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 280px;
+            z-index: 100;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(234, 128, 176, 0.3);
+            box-shadow: 0 0 20px rgba(234, 128, 176, 0.2);
+        }
+
+        .message-box h2 {
+            color: #ea80b0;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .message-box p {
+            line-height: 1.6;
+            font-size: 0.95rem;
+            font-style: italic;
+            margin: 0;
+        }
+
         @keyframes horizontal {
-            0% {
-                transform: rotateY(0deg) translateZ(150px);
-            }
-            100% {
-                transform: rotateY(360deg) translateZ(150px);
-            }
+            0% { transform: rotateY(0deg) translateZ(180px); }
+            100% { transform: rotateY(360deg) translateZ(180px); }
         }
     </style>
 </head>
 <body>
 
-    <div id="ui"></div>
+    <div id="ui">
+        <div class="message-box">
+            <h2>Ayşe'ye...</h2>
+            <p>
+                Bazen kırgınlıklar kelimelerin önüne geçiyor ama kalbimdeki yerini hiç değiştirmiyor. Ne kadar kırılırsam kırılayım, bu döngünün merkezi hep sensin. Seni her şeye rağmen çok seviyorum.
+            </p>
+        </div>
+    </div>
 
     <script>
         const ui = document.getElementById('ui');
-        const totalWords = 40; // Kalp yoğunluğunu buradan ayarlayabilirsin
+        const totalWords = 45; 
 
         for (let i = 0; i < totalWords; i++) {
-            // Animasyon gecikmesi için kapsayıcı
             const container = document.createElement('div');
             container.className = 'love_horizontal';
             container.style.setProperty('--i', i);
 
-            // Kelime elementini oluştur
             const word = document.createElement('div');
             word.className = 'love_word';
             word.innerText = 'I love you';
 
-            // Matematiksel kalp formülü (Kelimeleri kalp şeklinde dizmek için)
             const angle = (i / totalWords) * Math.PI * 2;
             
-            // Parametrik Kalp Denklemi
+            // Kalp Formülü
             const x = 16 * Math.pow(Math.sin(angle), 3);
             const y = -(13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle));
             
-            const scale = 15; // Kalbin büyüklüğü
+            const scale = 18; 
             word.style.left = `${x * scale}px`;
             word.style.top = `${y * scale}px`;
 
