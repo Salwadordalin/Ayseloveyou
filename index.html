@@ -3,87 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiseCephe - Özel Tasarım</title>
+    <title>Coding Wizard - Heart Animation</title>
     <style>
+        /* Genel sayfa düzeni */
         body {
             margin: 0;
             padding: 0;
             background-color: #000;
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
         }
 
-        /* Video'daki Kalp Animasyonu İçin Kapsayıcı */
+        /* Ana kapsayıcı */
         #ui {
-            margin-top: 50px;
-            text-align: center;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
 
+        /* Görseldeki .love_word sınıfı */
         .love_word {
             color: #ea80b0;
             font-size: 1.4rem;
+            position: absolute;
+            /* Görseldeki orijinal transform */
             transform: translateY(-100%) rotateZ(-30deg);
             text-shadow: 0 0 10px #fff;
             letter-spacing: 2px;
             white-space: nowrap;
-            display: block; /* Animasyonun görünmesi için */
+            user-select: none;
         }
 
+        /* Görseldeki .love_horizontal sınıfı */
         .love_horizontal {
+            position: absolute;
+            transform-style: preserve-3d;
+            /* Görseldeki animasyon tanımı */
             animation: horizontal 10000ms infinite alternate ease-in-out;
             animation-delay: calc(var(--i) * -300ms);
         }
 
+        /* Kalp formunu veren ve döndüren animasyon */
         @keyframes horizontal {
-            from { transform: translateX(-20px); }
-            to { transform: translateX(20px); }
-        }
-
-        /* Not Bölümü Stili */
-        .note-container {
-            margin-top: 100px;
-            padding: 20px;
-            border: 1px dashed #ea80b0;
-            background: rgba(234, 128, 176, 0.1);
-            border-radius: 10px;
-            max-width: 80%;
-            text-align: center;
-        }
-
-        .note-title {
-            color: #ea80b0;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .note-content {
-            font-style: italic;
-            line-height: 1.6;
+            0% {
+                transform: rotateY(0deg) translateZ(150px);
+            }
+            100% {
+                transform: rotateY(360deg) translateZ(150px);
+            }
         }
     </style>
 </head>
 <body>
 
-    <div id="ui">
-        <div class="love_horizontal" style="--i: 1;">
-            <span class="love_word">I love you</span>
-        </div>
-        <div class="love_horizontal" style="--i: 2;">
-            <span class="love_word">I love you</span>
-        </div>
-        </div>
+    <div id="ui"></div>
 
-    <div class="note-container">
-        <div class="note-title">Hatırlatıcı Not</div>
-        <div class="note-content">
-            "Gerızekalı vıdeodakının aynısını yap notu sabıt tut bu kadar aq"
-        </div>
-    </div>
+    <script>
+        const ui = document.getElementById('ui');
+        const totalWords = 40; // Kalp yoğunluğunu buradan ayarlayabilirsin
 
+        for (let i = 0; i < totalWords; i++) {
+            // Animasyon gecikmesi için kapsayıcı
+            const container = document.createElement('div');
+            container.className = 'love_horizontal';
+            container.style.setProperty('--i', i);
+
+            // Kelime elementini oluştur
+            const word = document.createElement('div');
+            word.className = 'love_word';
+            word.innerText = 'I love you';
+
+            // Matematiksel kalp formülü (Kelimeleri kalp şeklinde dizmek için)
+            const angle = (i / totalWords) * Math.PI * 2;
+            
+            // Parametrik Kalp Denklemi
+            const x = 16 * Math.pow(Math.sin(angle), 3);
+            const y = -(13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle));
+            
+            const scale = 15; // Kalbin büyüklüğü
+            word.style.left = `${x * scale}px`;
+            word.style.top = `${y * scale}px`;
+
+            container.appendChild(word);
+            ui.appendChild(container);
+        }
+    </script>
 </body>
 </html>
